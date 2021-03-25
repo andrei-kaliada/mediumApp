@@ -3,9 +3,9 @@
         <div class="container page">
             <div class="row">
                 <div class="col-md-6 offset-md-3 col-xs-12">
-                    <h1 class="text-xs-center">Sign Up</h1>
+                    <h1 class="text-xs-center">Sign In</h1>
                     <p class="text-xs-center">
-                        <router-link :to="{name: 'login'}">Have an account?</router-link>
+                        <router-link :to="{name: 'register'}">Need an account?</router-link>
                     </p>
 
                     <mcv-validation-errors 
@@ -13,14 +13,6 @@
                     :validationErrors="validationErrors"/>
 
                     <form @submit.prevent="onSubmit">
-                        <fieldset class="form-group">
-                            <input 
-                            type="text" 
-                            class="form-control form-control-lg" 
-                            placeholder="Username" 
-                            v-model="username"
-                            />
-                         </fieldset>
                          <fieldset class="form-group">
                              <input 
                             type="text" 
@@ -40,7 +32,7 @@
                         <button 
                         :disabled = "isSubmitting"
                          class="btn btn-lg btn-primary pull-xs-right">
-                            Sign Up
+                            Sign in
                         </button>
                     </form>
                 </div>
@@ -51,12 +43,13 @@
 
 
 <script>
+
 import McvValidationErrors from '@/components/ValidationErrors';
 import {actionTypes} from '@/store/modules/auth';
 import { mapState } from 'vuex';
 
 export default {
-    name:'McvRegister',
+    name:'McvLogin',
     components:{
         McvValidationErrors
     },
@@ -64,25 +57,24 @@ export default {
   
      return{
             email:'',
-            username:'',
             password:''
         }
     },
     computed:{
-    ...mapState({
+        ...mapState({
             isSubmitting: state => state.auth.isSubmitting,
             validationErrors: state => state.auth.validationErrors
         })
     },
     methods:{
         onSubmit(){
-            this.$store.dispatch(actionTypes.register, 
+            this.$store.dispatch(actionTypes.login, 
             {
                 email:this.email,
                 password:this.password,
-                username:this.username
             })
-            .then(() => {
+            .then(user => {
+                console.log('Promise result:',user)
                 this.$router.push({name:'home'})
             })
         }
