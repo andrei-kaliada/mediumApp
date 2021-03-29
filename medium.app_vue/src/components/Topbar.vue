@@ -2,7 +2,7 @@
     <nav class="navbar navbar-light">
         <div class="container">
             <router-link
-            :to="{name:'home'}"
+            :to="{name:'GlobalFeed'}"
             class="navbar-brand"
             >
                 Medium Clone
@@ -13,7 +13,7 @@
                 <li class="nav-item">
                      <router-link
                      class="nav-link"
-                    :to="{name:'home'}"
+                    :to="{name:'GlobalFeed'}"
                     exact
                     active-class="active"
                     >
@@ -55,7 +55,7 @@
                     >
                     <img 
                     class="user-pic"
-                    :src="currentUser.image" 
+                    :src="currentUser.image || require('@/assets/defaultUser.png')" 
                     alt="icon">
                          {{currentUser.username}}
                     </router-link>

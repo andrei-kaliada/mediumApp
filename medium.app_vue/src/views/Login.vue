@@ -75,7 +75,7 @@ export default {
             })
             .then(user => {
                 console.log('Promise result:',user)
-                this.$router.push({name:'home'})
+                this.$router.push({name:'GlobalFeed'})
             })
         }
     }
